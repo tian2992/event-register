@@ -1,11 +1,27 @@
+<h1>Registro</h1>
 <% if @error_message %>
 <div class="error"><%= @error_message  %></div>
 <% end %>
-<form action="" method="post" enctype="multipart/form-data">
-  <p>
-
-    <span class="form_field">Name:</span> <input type="text" name="name" />
-    <span class="form_field">e-mail:</span> <input type="text" name="email" />
-    <input type="submit" value="Sign me up!"  /> <br />
-  </p>
+<form action="" method="post" class="registration_form">
+  <fieldset>
+  <div>
+    <span class="obl">Nombre:</span>
+      <input type="text" name="name" />
+  </div>
+  <div>
+    <span class="obl">E-mail:</span>
+      <input type="text" name="email" />
+  </div>
+  <div>
+    <span class="obl">Instituci&oacute;n:</span>
+      <input type="text" name="inst" />
+  </div>
+  <div>
+    <span>Genero:</span>
+        <input type="text" size="1" name="sex" />
+  </div>
+  <div class="submit">
+    <input type="submit" value="¡Registrame!"  />
+  </div>
+  </fieldset>
 </form>

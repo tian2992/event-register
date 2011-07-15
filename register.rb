@@ -31,11 +31,11 @@ class Registree
   include DataMapper::Resource
 
   property :user_id,   Serial
-  property :name,      String, :length => 120
+  property :name,      String, :length => 120, :required => true
   property :email,     String, :format => :email_address, :required => true,
     :unique => true
-   
-  #you can add more fields in here
+  property :inst,      String, :length => 30, :required => true, :default => "Ninguna"
+  property :sex,       String, :length => 1
 
   def to_s
     "Registrar #{user_id}, #{name}"
@@ -46,7 +46,12 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 #DataMapper.auto_migrate!
 
+before do
+  cache_control :public, :must_revalidate, :max_age => 60
+end
+
 get '/' do
+  cache_control :max_age => 36000
   erb :index
 end
 
