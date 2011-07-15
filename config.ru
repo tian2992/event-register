@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
 
-require 'register'
+require './register'
 run Sinatra::Application
 
