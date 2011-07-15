@@ -22,19 +22,18 @@ class Registree
   property :name,      String, :length => 120
   property :email,     String, :format => :email_address, :required => true,
     :unique => true
+   
+  #you can add more fields in here
 
   def to_s
     "Registrar #{user_id}, #{name}"
   end
-
 end
-
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
 #DataMapper.auto_migrate!
 
-#mainPage
 get '/' do
   erb :index
 end
@@ -48,7 +47,7 @@ get '/id/:num' do
   end
 end
 
-get '/atendees' do
+get '/registrees' do
   all_persons = Registree.all
   return_list = ""
   for person in all_persons do
@@ -58,15 +57,16 @@ get '/atendees' do
 end
 
 get '/register' do
-  erb :register,:locals => { :title => 'lol' }
+  erb :register
 end
 
 post '/register' do
-  registree = Registree.new(name=>params[:name], email=>params[:email])
+  registree = Registree.new(:name=>params[:name], :email=>params[:email])
   if registree.save
-    redirect "/#{registree.user_id}"
+    redirect "/id/#{registree.user_id}"
   else
-    erb :failed_record
+    @error_message = "error in registration"
+    erb :register
   end
 end
 

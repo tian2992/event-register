@@ -1,0 +1,9 @@
+Copyright Sebastian Oliva, 2010 <http://sebastianoliva.com>
+Distributed under the ISC license
+(Equivalent to the X11 licence, or the Simplified BSD)
+
+Requires: ruby, rubygems, erb, sinatra, dm-core, dm-sqlite-adapter (or whatever Data Mapper adapter you might want)
+
+To Run: ruby register.rb, or your use your favourite rack compatible server
+
+Edit the files at /views to fit your needs, or check out register.rb for more options.
