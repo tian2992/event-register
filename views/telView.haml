@@ -1,0 +1,5 @@
+=@rep.to_s
+
+%form{:action=>'add', :method=>'post'}
+  %input{:name=>'num', :type=>'hidden', :value=>"#{@rep.  number}" ,:size=>20 }
+  %button{:action=>'submit'}

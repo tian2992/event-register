@@ -1,0 +1,7 @@
+sinatra --version '> 1.0'
+haml
+dm-core
+dm-validations
+dm-timestamps
+dm-migrations
+dm-postgres-adapter
