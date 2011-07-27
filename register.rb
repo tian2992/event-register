@@ -20,11 +20,13 @@ require 'dm-timestamps'
 require 'dm-migrations'
 
 
-if ENV['DATABASE_URL'] #are we running on Heroku (or a properly configured host?)
-  DataMapper.setup(:default, ENV['DATABASE_URL'])
-else #so, running locally, eh?
-  DataMapper::Logger.new($stdout, :debug)  
-  DataMapper.setup(:default, 'sqlite:///tmp/register-test.db')
+configure do
+  if ENV['DATABASE_URL']  #are we running on Heroku (or a properly configured host?)
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
+  else #so, running locally, eh?
+    DataMapper::Logger.new($stdout, :debug)  
+    DataMapper.setup(:default, 'sqlite:///tmp/register-test.db')
+  end
 end
 
 class Registree
@@ -46,6 +48,11 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 #DataMapper.auto_migrate!
 
+before do
+  cache_control :public, :max_age => 60
+  etag "v1", :weak
+end
+
 get '/' do
   erb :index
 end
@@ -60,6 +67,7 @@ get '/id/:num' do
 end
 
 get '/registrees' do
+  content_type 'text/csv'
   all_persons = Registree.all
   return_list = ""
   for person in all_persons do
