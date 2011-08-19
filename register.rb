@@ -64,14 +64,14 @@ get '/id/:num' do
   end
 end
 
-#get '/registrees' do
-#  all_persons = Registree.all
-#  return_list = ""
-#  for person in all_persons do
-#    return_list << "#{person.user_id},#{person.name},#{person.email}\n"
-#  end
-#  return return_list
-#end
+get '/registrees' do
+  all_persons = Registree.all
+  return_list = ""
+  for person in all_persons do
+    return_list << "#{person.user_id},#{person.name},#{person.email}\n"
+  end
+  return return_list
+end
 
 get '/register' do
   erb :register
